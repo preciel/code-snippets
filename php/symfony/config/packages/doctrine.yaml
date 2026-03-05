@@ -1,0 +1,5 @@
+doctrine:
+    dbal:
+        # add TinyIntType
+        types:
+            tinyint: App\Doctrine\DBAL\Types\TinyintType

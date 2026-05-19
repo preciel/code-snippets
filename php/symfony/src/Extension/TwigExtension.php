@@ -1,8 +1,7 @@
 <?php
 
-namespace App\src\Extension;
+namespace App\Extension;
 
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Uid\Uuid;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -31,12 +30,11 @@ class TwigExtension extends AbstractExtension {
         ];
     }
 
-    //ToDo Require symfony/uid
     public function getUuidFunction(): string {
         return Uuid::v7();
     }
 
-    public function jsonDecodeFilter($json): mixed {
+    public function jsonDecodeFilter(string $json): mixed {
         if(json_validate($json)) {
             return json_decode($json, true);
         }
@@ -57,10 +55,16 @@ class TwigExtension extends AbstractExtension {
     }
 
     public function strPadFilter(string $str, int $padLength, string $padString, string $direction = 'left'): string {
-        return $this->php->strPad($str, $padLength, $padString, $direction);
+        $pad = match($direction) {
+            'right' => STR_PAD_RIGHT,
+            'both'  => STR_PAD_BOTH,
+            default => STR_PAD_LEFT,
+        };
+
+        return str_pad($str, $padLength, $padString, $pad);
     }
 
-    public function trimFilter($input): array|string {
+    public function trimFilter(mixed $input): array|string {
         return $this->php->trim($input);
     }
 

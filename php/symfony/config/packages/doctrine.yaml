@@ -1,5 +1,5 @@
 doctrine:
     dbal:
-        # add TinyIntType
+        # Custom types — see src/Doctrine/DBAL/Types/
         types:
             tinyint: App\Doctrine\DBAL\Types\TinyintType

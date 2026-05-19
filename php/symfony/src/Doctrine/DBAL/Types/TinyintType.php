@@ -8,15 +8,11 @@ use Doctrine\DBAL\Types\Type;
 class TinyintType extends Type {
     private const string TINYINT = 'tinyint';
 
-    public function getName(): string {
-        return self::TINYINT;
-    }
-
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string {
-        $declaration = "TINYINT(1)";
+        $declaration = 'TINYINT';
 
         if(!empty($column['unsigned'])) {
-            $declaration .= " UNSIGNED";
+            $declaration .= ' UNSIGNED';
         }
 
         if(!empty($column['autoincrement'])) {

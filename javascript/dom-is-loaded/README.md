@@ -12,7 +12,7 @@ Images already loaded from cache are handled correctly via `img.complete` and `i
 import domIsLoaded from './dom-is-loaded.js';
 
 domIsLoaded().then(results => {
-    const failed = results.filter(r => !r).length;
+    const failed = results.filter(result => !result).length;
 
     if (failed > 0) {
         console.warn(`${failed} image(s) failed to load.`);
